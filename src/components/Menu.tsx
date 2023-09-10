@@ -1,12 +1,11 @@
-import { Card, CardBody } from "@chakra-ui/react";
+import { Box, Card } from "@mui/joy";
 
 export default function Menu(props: Props) {
   return (
     <Card>
-      <CardBody>(WIP)メニューです</CardBody>
+      <Box>(WIP)メニューです</Box>
     </Card>
   );
 }
 
-type Props = {
-};
+type Props = {};

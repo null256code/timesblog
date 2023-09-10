@@ -1,16 +1,19 @@
-import { Card, CardBody, CardHeader, Text } from "@chakra-ui/react";
+import Card from "@mui/joy/Card";
 import Profile from "./Profile";
+import { Box, Typography } from "@mui/joy";
 
 export default function BlogDescription(props: Props) {
   const { name, imageUrl, description } = props;
   return (
-    <Card>
-      <CardHeader pb={1}>
-        <Text fontWeight={"bold"}>TimesBlog</Text>
-      </CardHeader>
-      <CardBody pt={1}>
+    <Card variant="outlined">
+      <Box pb={1}>
+        <Typography level="h2" fontWeight={700}>
+          TimesBlog
+        </Typography>
+      </Box>
+      <Box pt={1}>
         <Profile {...{ name, imageUrl, description }} />
-      </CardBody>
+      </Box>
     </Card>
   );
 }

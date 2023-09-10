@@ -1,41 +1,40 @@
-"use client";
-
 import Menu from "@/components/Menu";
 import Post from "@/components/Post";
-import { Box, Grid, GridItem } from "@chakra-ui/react";
-import BlogDescription from './../components/BlogDescription';
+import BlogDescription from "./../components/BlogDescription";
+import { Box, Grid } from "@mui/joy";
 
 export default function Home() {
   return (
     <main>
       <Grid
-        templateAreas={`
+        display={"grid"}
+        gridTemplateAreas={`
         "profile body"
         "nav body"
         `}
         gridTemplateRows={"minmax(100px, auto) auto"}
         gridTemplateColumns={"380px 1fr"}
-        p={4}
-        gap={4}
+        gap={2}
+        p={2}
       >
-        <GridItem area={"profile"}>
+        <Grid gridArea={"profile"}>
           <Box>
             <BlogDescription
               name="null256code"
               description="シンプルなブログです"
             />
           </Box>
-        </GridItem>
-        <GridItem area={"nav"}>
-            <Menu />
-        </GridItem>
-        <GridItem area={"body"}>
+        </Grid>
+        <Grid gridArea={"nav"}>
+          <Menu />
+        </Grid>
+        <Grid gridArea={"body"}>
           <Post
             title="TitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitle"
             postedTime={new Date()}
-            body="TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText"
+            body="TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText"
           />
-        </GridItem>
+        </Grid>
       </Grid>
     </main>
   );

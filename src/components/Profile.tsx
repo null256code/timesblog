@@ -1,18 +1,16 @@
-import {
-  Avatar,
-  Flex,
-  Text
-} from "@chakra-ui/react";
+import { Avatar, Box, Typography } from "@mui/joy";
 
 export default function Profile(props: Props) {
   const { name, imageUrl, description } = props;
   return (
     <>
-      <Flex flexDirection={"row"} alignItems={"center"} pb={2}>
-        <Avatar name={name} src={imageUrl} size={"sm"} />
-        <Text padding={2}>{name}</Text>
-      </Flex>
-      <Text>{description}</Text>
+      <Box display={"flex"} flexDirection={"row"} alignItems={"center"} pb={2}>
+        <Avatar alt={name} src={imageUrl} size={"sm"}>
+          {name}
+        </Avatar>
+        <Typography p={2}>{name}</Typography>
+      </Box>
+      <Typography>{description}</Typography>
     </>
   );
 }

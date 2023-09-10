@@ -1,48 +1,42 @@
-import { Text, Card, CardBody, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Card, Grid, Typography } from "@mui/joy";
 import TagList from "./TagList";
 
 export default function Post(props: Props) {
   const { title, postedTime, body } = props;
   return (
-    <Card width={"480px"}>
-      <CardBody py={4}>
-        <Grid
-          templateAreas={`
-                  "title timestamp"
-                  "contents contents"
-                  "footer footer"
-                  `}
-          gridTemplateColumns={"auto min-content"}
-          gridTemplateRows={"auto 1fr auto"}
-          p={2}
-          gap={4}
-        >
-          <GridItem area={"title"}>
-            <Text
-              fontSize={"2xl"}
+    <Card sx={{ width: "480px" }}>
+      <Box py={1}>
+        <Grid container spacing={2}>
+          <Grid xs={10}>
+            <Typography
+              level="title-md"
               whiteSpace={"pre-wrap"}
-              wordBreak={"break-all"}
+              sx={{wordBreak: "break-all"}}
             >
               {title}
-            </Text>
-          </GridItem>
-          <GridItem area={"timestamp"}>
-            <Text fontSize={"sm"} color={"gray.500"}>
+            </Typography>
+          </Grid>
+          <Grid xs={2}>
+            <Typography level="body-xs" textColor={"neutral.500"}>
               {postedTime.toLocaleDateString()}
-            </Text>
-          </GridItem>
-          <GridItem area={"contents"}>
-            <Text whiteSpace={"pre-wrap"} wordBreak={"break-all"}>
+            </Typography>
+          </Grid>
+          <Grid xs={12}>
+            <Typography
+              level="title-md"
+              whiteSpace={"pre-wrap"}
+              sx={{wordBreak: "break-all"}}
+            >
               {body}
-            </Text>
-          </GridItem>
-          <GridItem area={"footer"}>
+            </Typography>
+          </Grid>
+          <Grid xs={12}>
             <TagList
               tags={[{ tagName: "#ほげ" }, { tagName: "#ふが", link: "/fuga" }]}
             />
-          </GridItem>
+          </Grid>
         </Grid>
-      </CardBody>
+      </Box>
     </Card>
   );
 }
