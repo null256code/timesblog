@@ -1,41 +1,36 @@
-import Menu from "@/components/Menu";
+import ImageWithModal from "@/components/ImageWithModal";
 import Post from "@/components/Post";
-import BlogDescription from "./../components/BlogDescription";
-import { Box, Grid } from "@mui/joy";
+import { getBlogList } from "@/libs/microcms-client";
+import { Stack } from "@mui/joy";
+import parse, { Element, HTMLReactParserOptions } from "html-react-parser";
 
-export default function Home() {
+export default async function Home() {
+  const { contents, totalCount, limit, offset } = await getBlogList();
+
+  const options: HTMLReactParserOptions = {
+    replace: (domNode) => {
+      if (domNode instanceof Element && domNode.type === "tag") {
+        if (domNode.name === "img") {
+          // TODO: ひとつ上の <figure /> にonClickをつけるようにしたい
+          const src = domNode.attribs["src"];
+          const alt = domNode.attribs["alt"];
+          return <ImageWithModal src={src} alt={alt} />;
+        }
+      }
+    },
+  };
+
   return (
-    <main>
-      <Grid
-        display={"grid"}
-        gridTemplateAreas={`
-        "profile body"
-        "nav body"
-        `}
-        gridTemplateRows={"minmax(100px, auto) auto"}
-        gridTemplateColumns={"380px 1fr"}
-        gap={2}
-        p={2}
-      >
-        <Grid gridArea={"profile"}>
-          <Box>
-            <BlogDescription
-              name="null256code"
-              description="シンプルなブログです"
-            />
-          </Box>
-        </Grid>
-        <Grid gridArea={"nav"}>
-          <Menu />
-        </Grid>
-        <Grid gridArea={"body"}>
-          <Post
-            title="TitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitle"
-            postedTime={new Date()}
-            body="TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText"
-          />
-        </Grid>
-      </Grid>
-    </main>
+    <Stack spacing={2}>
+      {contents.map((blog) => (
+        <Post
+          key={`post-${blog.id}`}
+          title={blog.title}
+          postedTime={new Date(blog.createdAt)}
+        >
+          {parse(blog.content, options)}
+        </Post>
+      ))}
+    </Stack>
   );
 }
