@@ -1,5 +1,5 @@
-import { Link, Stack, Typography } from "@mui/joy";
-import NextLink from "next/link";
+import { Stack, Typography } from "@mui/joy";
+import { WpLink } from "./wrapper/WpLink";
 
 export default function TagList(props: Props) {
   const { tags } = props;
@@ -7,15 +7,13 @@ export default function TagList(props: Props) {
     <Stack direction={"row"} spacing={2}>
       {tags.map((t, index) =>
         t.link ? (
-          // TODO: MUIのLinkとnextjsのLinkを合わせて使う方法
-          <Link
+          <WpLink
             key={`TagList-${index}`}
-            // as={NextLink}
             href={t.link}
             fontSize={"sm"}
           >
             {t.tagName}
-          </Link>
+          </WpLink>
         ) : (
           <Typography
             key={`TagList-${index}`}
