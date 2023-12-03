@@ -1,6 +1,6 @@
 import BlogDescription from "@/components/BlogDescription";
 import Menu from "@/components/Menu";
-import { getProfile } from "@/libs/microcms-client";
+import { getDefinition } from "@/libs/microcms/definitionApi";
 import { Box, Grid } from "@mui/joy";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -18,7 +18,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const profile = await getProfile();
+  const { profile } = await getDefinition();
 
   return (
     <html lang="ja">

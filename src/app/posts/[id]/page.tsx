@@ -1,8 +1,8 @@
 import Post from "@/components/Post";
 import { htmlParserOptions } from "@/libs/html-parser-option";
+import { getBlogDetail, getBlogList } from "@/libs/microcms/blogApi";
 import parse from "html-react-parser";
 import { notFound } from "next/navigation";
-import { getBlogDetail, getBlogList } from "../../../libs/microcms-client";
 
 export async function generateStaticParams() {
   const { contents } = await getBlogList();

@@ -1,6 +1,6 @@
 import Post from "@/components/Post";
 import { htmlParserOptions } from "@/libs/html-parser-option";
-import { getBlogList } from "@/libs/microcms-client";
+import { getBlogList } from "@/libs/microcms/blogApi";
 import { Stack } from "@mui/joy";
 import parse from "html-react-parser";
 
