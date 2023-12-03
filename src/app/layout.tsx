@@ -38,6 +38,7 @@ export default async function RootLayout({
             <Box>
               <BlogDescription
                 name={profile.userName}
+                imageUrl={profile.userImage?.url}
                 description={profile.description}
               />
             </Box>
