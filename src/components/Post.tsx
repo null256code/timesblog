@@ -1,9 +1,10 @@
+import { Tag } from "@/libs/microcms/blogApi";
 import { Box, Card, Grid, Typography } from "@mui/joy";
-import TagList from "./TagList";
 import { ReactNode } from "react";
+import TagList from "./TagList";
 
 export default function Post(props: Props) {
-  const { children, title, postedTime } = props;
+  const { children, title, postedTime, tags } = props;
   return (
     <Card>
       <Box py={1}>
@@ -64,7 +65,11 @@ export default function Post(props: Props) {
           </Grid>
           <Grid xs={12}>
             <TagList
-              tags={[{ tagName: "#ほげ" }, { tagName: "#ふが", link: "/fuga" }]}
+              tags={tags.map((t) =>
+                t.isVisibleInMenu
+                  ? { tagName: t.tagKey, link: `/posts/tag/${t.tagKey}` }
+                  : { tagName: t.tagKey }
+              )}
             />
           </Grid>
         </Grid>
@@ -77,4 +82,5 @@ type Props = {
   children: ReactNode;
   title: string;
   postedTime: Date;
+  tags: Tag[];
 };

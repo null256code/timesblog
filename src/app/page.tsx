@@ -14,6 +14,7 @@ export default async function Home() {
           key={`post-${blog.id}`}
           title={blog.title}
           postedTime={new Date(blog.createdAt)}
+          tags={blog.tags}
         >
           {parse(blog.content, htmlParserOptions)}
         </Post>
