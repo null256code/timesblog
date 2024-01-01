@@ -1,6 +1,8 @@
 import BlogDescription from "@/components/BlogDescription";
 import Menu from "@/components/Menu";
+import { BlogResponse, getBlogList } from "@/libs/microcms/blogApi";
 import { getDefinition } from "@/libs/microcms/definitionApi";
+import { getMenuTagList } from "@/libs/microcms/tagApi";
 import { Box, Grid } from "@mui/joy";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -19,6 +21,26 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const { profile } = await getDefinition();
+  const {
+    contents: menuTags,
+    limit,
+    offset,
+    totalCount,
+  } = await getMenuTagList();
+
+  const keyOfTags: keyof BlogResponse = "tags";
+  const menuProps = await Promise.all(
+    menuTags.map(async (t) => {
+      const postsOfMenuTag = await getBlogList({
+        filters: `${keyOfTags}[contains]${t.id}`,
+      });
+      return {
+        tagKey: t.tagKey,
+        tagName: t.tagName,
+        count: postsOfMenuTag.totalCount,
+      };
+    })
+  );
 
   return (
     <html lang="ja">
@@ -44,7 +66,7 @@ export default async function RootLayout({
             </Box>
           </Grid>
           <Grid gridArea={"nav"}>
-            <Menu />
+            <Menu tags={menuProps.sort((p1, p2) => p2.count - p1.count)} />
           </Grid>
           <Grid gridArea={"body"}>
             <main>{children}</main>

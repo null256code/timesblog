@@ -1,5 +1,6 @@
 import { MicroCMSDate, MicroCMSImage, MicroCMSQueries } from "microcms-js-sdk";
 import { microCMSClient } from "./microcms-client";
+import { TagResponse } from "./tagApi";
 
 //ブログの型定義
 export type BlogResponse = {
@@ -7,15 +8,8 @@ export type BlogResponse = {
   title: string;
   content: string;
   eyecatch?: MicroCMSImage;
-  tags: Tag[]
+  tags: TagResponse[];
 } & MicroCMSDate;
-
-export type Tag = {
-  tagKey: string;
-  tagName: string;
-  isVisibleInMenu: boolean;
-}
-
 
 // ブログ一覧を取得
 export const getBlogList = async (queries?: MicroCMSQueries) => {

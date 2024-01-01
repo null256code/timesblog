@@ -67,8 +67,8 @@ export default function Post(props: Props) {
             <TagList
               tags={tags.map((t) =>
                 t.isVisibleInMenu
-                  ? { tagName: t.tagKey, link: `/posts/tag/${t.tagKey}` }
-                  : { tagName: t.tagKey }
+                  ? { tagName: t.tagName, link: `/posts/tag/${t.tagKey}` }
+                  : { tagName: t.tagName }
               )}
             />
           </Grid>
