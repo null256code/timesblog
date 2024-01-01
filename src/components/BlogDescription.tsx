@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/joy";
 export default function BlogDescription(props: Props) {
   const { name, imageUrl, description } = props;
   return (
-    <Card variant="outlined">
+    <Card>
       <Box pb={1}>
         <Typography level="h2" fontWeight={700}>
           TimesBlog

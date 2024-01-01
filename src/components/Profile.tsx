@@ -11,7 +11,7 @@ export default function Profile(props: Props) {
         </Avatar>
         <Typography p={2}>{name}</Typography>
       </Box>
-      <Typography>{description}</Typography>
+      <Typography level="body-sm">{description}</Typography>
     </>
   );
 }

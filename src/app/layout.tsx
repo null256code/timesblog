@@ -52,7 +52,7 @@ export default async function RootLayout({
         "nav body"
         `}
           gridTemplateRows={"minmax(100px, auto) auto"}
-          gridTemplateColumns={"380px 480px"}
+          gridTemplateColumns={"280px 480px"}
           gap={2}
           p={2}
         >
