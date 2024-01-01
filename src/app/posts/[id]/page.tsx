@@ -4,6 +4,8 @@ import { getBlogDetail, getBlogList } from "@/libs/microcms/blogApi";
 import parse from "html-react-parser";
 import { notFound } from "next/navigation";
 
+export const revalidate = 60 * 60;
+
 export async function generateStaticParams() {
   const { contents } = await getBlogList();
 
@@ -16,7 +18,7 @@ export async function generateStaticParams() {
   return [...paths];
 }
 
-export default async function StaticDetailPage({
+export default async function PostDetail({
   params: { id },
 }: {
   params: { id: string };
