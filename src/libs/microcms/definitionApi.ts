@@ -11,7 +11,6 @@ export type Profile = {
   description?: string | undefined;
 } & MicroCMSDate;
 
-
 export const getDefinition = async () => {
   const data = await microCMSClient.getObject<DefinitionResponse>({
     endpoint: "definition",

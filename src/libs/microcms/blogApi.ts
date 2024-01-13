@@ -24,7 +24,7 @@ export const getBlogList = async (queries?: MicroCMSQueries) => {
 // ブログの詳細を取得
 export const getBlogDetail = async (
   contentId: string,
-  queries?: MicroCMSQueries
+  queries?: MicroCMSQueries,
 ) => {
   const detailData = await microCMSClient.getListDetail<BlogResponse>({
     endpoint: "blogs",

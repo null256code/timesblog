@@ -12,8 +12,8 @@ export default function Post(props: Props) {
           <Grid xs={10}>
             <Typography
               level="title-lg"
-              fontWeight={"bolder"}
-              whiteSpace={"pre-wrap"}
+              fontWeight="bolder"
+              whiteSpace="pre-wrap"
               sx={{ wordBreak: "break-all" }}
             >
               {title}
@@ -21,18 +21,18 @@ export default function Post(props: Props) {
           </Grid>
           <Grid
             xs={2}
-            display={"inline-flex"}
-            justifyContent={"end"}
-            alignItems={"baseline"}
+            display="inline-flex"
+            justifyContent="end"
+            alignItems="baseline"
           >
-            <Typography level="body-xs" textColor={"neutral.500"}>
+            <Typography level="body-xs" textColor="neutral.500">
               {postedTime.toLocaleDateString()}
             </Typography>
           </Grid>
           <Grid xs={12}>
             <Box
-              typography={"body-sm"}
-              whiteSpace={"pre-wrap"}
+              typography="body-sm"
+              whiteSpace="pre-wrap"
               sx={{
                 wordBreak: "break-all",
                 "& :where(h1, h2, h3, h4, h5, h6)": {
@@ -68,7 +68,7 @@ export default function Post(props: Props) {
               tags={tags.map((t) =>
                 t.isVisibleInMenu
                   ? { tagName: t.tagName, link: `/posts/tag/${t.tagKey}` }
-                  : { tagName: t.tagName }
+                  : { tagName: t.tagName },
               )}
             />
           </Grid>

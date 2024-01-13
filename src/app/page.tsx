@@ -5,7 +5,7 @@ import { Stack } from "@mui/joy";
 import parse from "html-react-parser";
 
 export default async function Home() {
-  const { contents, totalCount, limit, offset } = await getBlogList();
+  const { contents } = await getBlogList();
 
   return (
     <Stack spacing={2}>

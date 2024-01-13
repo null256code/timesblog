@@ -9,7 +9,7 @@ export const revalidate = 60 * 60;
 export async function generateStaticParams() {
   const { contents } = await getBlogList();
 
-  return contents.map((blog) => ({ id: blog.id, }));
+  return contents.map((blog) => ({ id: blog.id }));
 }
 
 export default async function PostDetail({

@@ -1,7 +1,4 @@
-import {
-  MicroCMSDate,
-  MicroCMSQueries
-} from "microcms-js-sdk";
+import { MicroCMSDate, MicroCMSQueries } from "microcms-js-sdk";
 import { microCMSClient } from "./microcms-client";
 
 export type TagResponse = {
@@ -28,12 +25,11 @@ export const getMenuTagList = async () => {
 
 const keyOfTagKey: keyof TagResponse = "tagKey";
 export const getTagDetailByTagKey = async (tagKey: string) => {
-
   const response = await microCMSClient.getList<TagResponse>({
     endpoint: "tags",
     queries: {
       filters: `${keyOfTagKey}[equals]${tagKey}[and]${keyOfIsVisibleInMenu}[equals]true`,
-      limit: 1
+      limit: 1,
     },
   });
 

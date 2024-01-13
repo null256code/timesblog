@@ -1,12 +1,4 @@
-import {
-  Box,
-  Card,
-  List,
-  ListDivider,
-  ListItem,
-  Stack,
-  Typography,
-} from "@mui/joy";
+import { Box, Card, List, ListDivider, ListItem, Stack } from "@mui/joy";
 import { WpLink } from "./wrapper/WpLink";
 
 export default function Menu(props: Props) {
@@ -20,10 +12,10 @@ export default function Menu(props: Props) {
             "--ListDivider-gap": "2px",
           }}
         >
-          <Stack divider={<ListDivider inset={"gutter"} />}>
+          <Stack divider={<ListDivider inset="gutter" />}>
             {tags.map((t, index) => (
               <ListItem key={`menuTagList-${index}`}>
-                <WpLink href={`/posts/tag/${t.tagKey}`} level={"body-sm"}>
+                <WpLink href={`/posts/tag/${t.tagKey}`} level="body-sm">
                   #{t.tagName} ({t.count})
                 </WpLink>
               </ListItem>
