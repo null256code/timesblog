@@ -1,23 +1,23 @@
 import Post from "@/components/Post";
 import { htmlParserOptions } from "@/libs/html-parser-option";
-import { getBlogList } from "@/libs/microcms/blogApi";
+import { getPostList } from "@/libs/microcms/postApi";
 import { Stack } from "@mui/joy";
 import parse from "html-react-parser";
 
 export default async function Home() {
-  const { contents } = await getBlogList();
+  const { contents } = await getPostList();
 
   return (
     <Stack spacing={2}>
-      {contents.map((blog) => (
+      {contents.map((post) => (
         <Post
-          key={`post-${blog.id}`}
-          contentId={blog.id}
-          title={blog.title}
-          postedTime={new Date(blog.createdAt)}
-          tags={blog.tags}
+          key={`post-${post.id}`}
+          contentId={post.id}
+          title={post.title}
+          postedTime={new Date(post.createdAt)}
+          tags={post.tags}
         >
-          {parse(blog.content, htmlParserOptions)}
+          {parse(post.content, htmlParserOptions)}
         </Post>
       ))}
     </Stack>

@@ -1,15 +1,15 @@
 import Post from "@/components/Post";
 import { htmlParserOptions } from "@/libs/html-parser-option";
-import { getBlogDetail, getBlogList } from "@/libs/microcms/blogApi";
+import { getPostDetail, getPostList } from "@/libs/microcms/postApi";
 import parse from "html-react-parser";
 import { notFound } from "next/navigation";
 
 export const revalidate = 60 * 60;
 
 export async function generateStaticParams() {
-  const { contents } = await getBlogList();
+  const { contents } = await getPostList();
 
-  return contents.map((blog) => ({ id: blog.id }));
+  return contents.map((post) => ({ id: post.id }));
 }
 
 export default async function PostDetail({
@@ -17,21 +17,21 @@ export default async function PostDetail({
 }: {
   params: { id: string };
 }) {
-  const blog = await getBlogDetail(id);
+  const post = await getPostDetail(id);
 
-  if (!blog) {
+  if (!post) {
     notFound();
   }
 
   return (
     <Post
-      key={`post-${blog.id}`}
-      contentId={blog.id}
-      title={blog.title}
-      postedTime={new Date(blog.createdAt)}
-      tags={blog.tags}
+      key={`post-${post.id}`}
+      contentId={post.id}
+      title={post.title}
+      postedTime={new Date(post.createdAt)}
+      tags={post.tags}
     >
-      {parse(blog.content, htmlParserOptions)}
+      {parse(post.content, htmlParserOptions)}
     </Post>
   );
 }

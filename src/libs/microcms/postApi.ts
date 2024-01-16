@@ -2,8 +2,10 @@ import { MicroCMSDate, MicroCMSImage, MicroCMSQueries } from "microcms-js-sdk";
 import { microCMSClient } from "./microcms-client";
 import { TagResponse } from "./tagApi";
 
+const ENDPOINT = "posts";
+
 //ブログの型定義
-export type BlogResponse = {
+export type PostResponse = {
   id: string;
   title: string;
   content: string;
@@ -12,9 +14,9 @@ export type BlogResponse = {
 } & MicroCMSDate;
 
 // ブログ一覧を取得
-export const getBlogList = async (queries?: MicroCMSQueries) => {
-  const listData = await microCMSClient.getList<BlogResponse>({
-    endpoint: "blogs",
+export const getPostList = async (queries?: MicroCMSQueries) => {
+  const listData = await microCMSClient.getList<PostResponse>({
+    endpoint: ENDPOINT,
     queries,
   });
 
@@ -22,12 +24,12 @@ export const getBlogList = async (queries?: MicroCMSQueries) => {
 };
 
 // ブログの詳細を取得
-export const getBlogDetail = async (
+export const getPostDetail = async (
   contentId: string,
   queries?: MicroCMSQueries,
 ) => {
-  const detailData = await microCMSClient.getListDetail<BlogResponse>({
-    endpoint: "blogs",
+  const detailData = await microCMSClient.getListDetail<PostResponse>({
+    endpoint: ENDPOINT,
     contentId,
     queries,
   });

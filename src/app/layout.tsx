@@ -1,6 +1,6 @@
 import BlogDescription from "@/components/BlogDescription";
 import Menu from "@/components/Menu";
-import { BlogResponse, getBlogList } from "@/libs/microcms/blogApi";
+import { PostResponse, getPostList } from "@/libs/microcms/postApi";
 import { getDefinition } from "@/libs/microcms/definitionApi";
 import { getMenuTagList } from "@/libs/microcms/tagApi";
 import { Box, Grid } from "@mui/joy";
@@ -24,10 +24,10 @@ export default async function RootLayout({
   const { profile } = await getDefinition();
   const { contents: menuTags } = await getMenuTagList();
 
-  const keyOfTags: keyof BlogResponse = "tags";
+  const keyOfTags: keyof PostResponse = "tags";
   const menuProps = await Promise.all(
     menuTags.map(async (t) => {
-      const postsOfMenuTag = await getBlogList({
+      const postsOfMenuTag = await getPostList({
         filters: `${keyOfTags}[contains]${t.id}`,
       });
       return {
