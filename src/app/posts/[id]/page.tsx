@@ -26,6 +26,7 @@ export default async function PostDetail({
   return (
     <Post
       key={`post-${blog.id}`}
+      contentId={blog.id}
       title={blog.title}
       postedTime={new Date(blog.createdAt)}
       tags={blog.tags}

@@ -1,5 +1,6 @@
 import { Box, Card, List, ListDivider, ListItem, Stack } from "@mui/joy";
 import { WpLink } from "./wrapper/WpLink";
+import { Routes } from "@/constants/routes";
 
 export default function Menu(props: Props) {
   const { tags } = props;
@@ -15,7 +16,10 @@ export default function Menu(props: Props) {
           <Stack divider={<ListDivider inset="gutter" />}>
             {tags.map((t, index) => (
               <ListItem key={`menuTagList-${index}`}>
-                <WpLink href={`/posts/tag/${t.tagKey}`} level="body-sm">
+                <WpLink
+                  href={Routes.PostsByTag.value(t.tagKey)}
+                  level="body-sm"
+                >
                   #{t.tagName} ({t.count})
                 </WpLink>
               </ListItem>

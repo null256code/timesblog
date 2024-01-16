@@ -1,15 +1,23 @@
+import { Routes } from "@/constants/routes";
+import { Box } from "@mui/joy";
 import Card from "@mui/joy/Card";
 import Profile from "./Profile";
-import { Box, Typography } from "@mui/joy";
+import { WpLink } from "./wrapper/WpLink";
 
 export default function BlogDescription(props: Props) {
   const { name, imageUrl, description } = props;
   return (
     <Card>
       <Box pb={1}>
-        <Typography level="h2" fontWeight={700}>
+        <WpLink
+          href={Routes.Index.value}
+          level="h2"
+          fontWeight={700}
+          textColor="neutral.700"
+          underline="none"
+        >
           TimesBlog
-        </Typography>
+        </WpLink>
       </Box>
       <Box pt={1}>
         <Profile {...{ name, imageUrl, description }} />

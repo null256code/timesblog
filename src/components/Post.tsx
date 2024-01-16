@@ -1,10 +1,12 @@
-import { Tag } from "@/libs/microcms/blogApi";
+import { TagResponse } from "@/libs/microcms/tagApi";
 import { Box, Card, Grid, Typography } from "@mui/joy";
 import { ReactNode } from "react";
 import TagList from "./TagList";
+import { Routes } from "@/constants/routes";
+import { WpLink } from "./wrapper/WpLink";
 
 export default function Post(props: Props) {
-  const { children, title, postedTime, tags } = props;
+  const { children, contentId, title, postedTime, tags } = props;
   return (
     <Card>
       <Box py={1}>
@@ -25,9 +27,14 @@ export default function Post(props: Props) {
             justifyContent="end"
             alignItems="baseline"
           >
-            <Typography level="body-xs" textColor="neutral.500">
+            <WpLink
+              href={Routes.PostsById.value(contentId)}
+              level="body-xs"
+              color="neutral"
+              underline="always"
+            >
               {postedTime.toLocaleDateString()}
-            </Typography>
+            </WpLink>
           </Grid>
           <Grid xs={12}>
             <Box
@@ -67,7 +74,10 @@ export default function Post(props: Props) {
             <TagList
               tags={tags.map((t) =>
                 t.isVisibleInMenu
-                  ? { tagName: t.tagName, link: `/posts/tag/${t.tagKey}` }
+                  ? {
+                      tagName: t.tagName,
+                      link: Routes.PostsByTag.value(t.tagKey),
+                    }
                   : { tagName: t.tagName },
               )}
             />
@@ -80,7 +90,8 @@ export default function Post(props: Props) {
 
 type Props = {
   children: ReactNode;
+  contentId: string;
   title: string;
   postedTime: Date;
-  tags: Tag[];
+  tags: TagResponse[];
 };

@@ -39,6 +39,7 @@ export default async function PostsByTag({
       {contents.map((blog) => (
         <Post
           key={`post-${blog.id}`}
+          contentId={blog.id}
           title={blog.title}
           postedTime={new Date(blog.createdAt)}
           tags={blog.tags}
