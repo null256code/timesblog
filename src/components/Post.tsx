@@ -1,31 +1,34 @@
 import { TagResponse } from "@/libs/microcms/tagApi";
-import { Box, Card, Grid, Typography } from "@mui/joy";
-import { ReactNode } from "react";
+import { Box, Card, CardProps, Grid, Typography } from "@mui/joy";
+import { FC, ReactComponentElement, ReactNode } from "react";
 import TagList from "./TagList";
 import { Routes } from "@/constants/routes";
 import { WpLink } from "./wrapper/WpLink";
 
-export default function Post(props: Props) {
-  const { children, contentId, title, postedTime, tags } = props;
+export default function Post(props: PostProps) {
+  const { children, contentId, title, postedTime, tags, ...cardProps } = props;
   return (
-    <Card>
+    <Card {...cardProps}>
       <Box py={1}>
         <Grid container spacing={1}>
           <Grid xs={10}>
-            <Typography
-              level="title-lg"
-              fontWeight="bolder"
-              whiteSpace="pre-wrap"
-              sx={{ wordBreak: "break-all" }}
-            >
-              {title}
-            </Typography>
+            {title && (
+              <Typography
+                level="title-lg"
+                fontWeight="bolder"
+                whiteSpace="pre-wrap"
+                sx={{ wordBreak: "break-all" }}
+              >
+                {title}
+              </Typography>
+            )}
           </Grid>
           <Grid
             xs={2}
             display="inline-flex"
             justifyContent="end"
             alignItems="baseline"
+            py={0}
           >
             <WpLink
               href={Routes.PostsById.value(contentId)}
@@ -36,7 +39,7 @@ export default function Post(props: Props) {
               {postedTime.toLocaleDateString()}
             </WpLink>
           </Grid>
-          <Grid xs={12}>
+          <Grid xs={12} mt={title ? undefined : -1}>
             <Box
               typography="body-sm"
               whiteSpace="pre-wrap"
@@ -88,10 +91,12 @@ export default function Post(props: Props) {
   );
 }
 
-type Props = {
+export type PostProps = {
   children: ReactNode;
   contentId: string;
-  title: string;
+  title?: string;
   postedTime: Date;
   tags: TagResponse[];
-};
+} & CardProps;
+
+export type PostComponentType = ReactComponentElement<FC<PostProps>, PostProps>;

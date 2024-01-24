@@ -8,10 +8,12 @@ export default function TagList(props: Props) {
       {tags.map((t, index) =>
         t.link ? (
           <WpLink key={`TagList-${index}`} href={t.link} underline="none">
-            <Chip color="primary">{t.tagName}</Chip>
+            <Chip color="primary" size="sm">
+              {t.tagName}
+            </Chip>
           </WpLink>
         ) : (
-          <Chip key={`TagList-${index}`} disabled>
+          <Chip key={`TagList-${index}`} disabled variant="solid" size="sm">
             {t.tagName}
           </Chip>
         ),

@@ -7,10 +7,11 @@ const ENDPOINT = "posts";
 //ブログの型定義
 export type PostResponse = {
   id: string;
-  title: string;
+  title?: string;
   content: string;
   eyecatch?: MicroCMSImage;
   tags: TagResponse[];
+  rootPost?: PostResponse;
 } & MicroCMSDate;
 
 // ブログ一覧を取得
