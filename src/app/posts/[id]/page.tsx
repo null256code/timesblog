@@ -3,7 +3,6 @@ import ThreadPost from "@/components/ThreadPost";
 import { htmlParserOptions } from "@/libs/html-parser-option";
 import { getPostDetail, getPostList } from "@/libs/microcms/postApi";
 import parse from "html-react-parser";
-import { notFound } from "next/navigation";
 
 export const revalidate = 60 * 60;
 
@@ -18,17 +17,13 @@ export default async function PostDetail({
 }: {
   params: { id: string };
 }) {
-  const requestPost = await getPostDetail(id);
+  const postDetail = await getPostDetail(id);
 
-  if (!requestPost) {
-    notFound();
-  }
-
-  const rootPost = requestPost.rootPost
-    ? await getPostDetail(requestPost.rootPost.id) // XXX: requestPost.rootPostを使うとtagsからid以外取れないので、とりあえず…
-    : requestPost;
-  const childPostsFilter = requestPost.rootPost
-    ? `rootPost[equals]${requestPost.rootPost.id}`
+  const rootPost = postDetail.rootPost
+    ? await getPostDetail(postDetail.rootPost.id) // XXX: postDetail.rootPostを使うとtagsからid以外取れないので、とりあえず…
+    : postDetail;
+  const childPostsFilter = postDetail.rootPost
+    ? `rootPost[equals]${postDetail.rootPost.id}`
     : `rootPost[equals]${id}`;
   const { contents: childPosts } = await getPostList({
     filters: childPostsFilter,

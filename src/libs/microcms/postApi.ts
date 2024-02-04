@@ -1,6 +1,7 @@
 import { MicroCMSDate, MicroCMSImage, MicroCMSQueries } from "microcms-js-sdk";
 import { microCMSClient } from "./microcms-client";
 import { TagResponse } from "./tagApi";
+import { notFound } from "next/navigation";
 
 const ENDPOINT = "posts";
 
@@ -29,11 +30,13 @@ export const getPostDetail = async (
   contentId: string,
   queries?: MicroCMSQueries,
 ) => {
-  const detailData = await microCMSClient.getListDetail<PostResponse>({
-    endpoint: ENDPOINT,
-    contentId,
-    queries,
-  });
+  const detailData = await microCMSClient
+    .getListDetail<PostResponse>({
+      endpoint: ENDPOINT,
+      contentId,
+      queries,
+    })
+    .catch(() => notFound());
 
   return detailData;
 };
