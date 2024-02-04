@@ -75,7 +75,7 @@ export default function Post(props: PostProps) {
                 height: "auto",
               },
               "& p": {
-                my: "0.4em",
+                my: "0.8em",
               },
               "& figure": {
                 p: "8px",
