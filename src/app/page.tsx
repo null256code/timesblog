@@ -4,6 +4,8 @@ import { getPostList } from "@/libs/microcms/postApi";
 import { Stack } from "@mui/joy";
 import parse from "html-react-parser";
 
+export const revalidate = 60 * 60;
+
 export default async function Home() {
   const { contents } = await getPostList();
 
