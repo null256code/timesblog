@@ -55,7 +55,7 @@ export default function Post(props: PostProps) {
             {postedTime.toLocaleDateString()}
           </WpLink>
         </Grid>
-        <Grid xs={12} mt={title ? undefined : -1}>
+        <Grid xs={12} mt={rootPost || title ? undefined : -2}>
           <Box
             typography="body-sm"
             whiteSpace="pre-wrap"

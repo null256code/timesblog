@@ -53,7 +53,6 @@ export default async function PostDetail({
       // title={post.title}
       postedTime={new Date(post.createdAt)}
       tags={post.tags}
-      sx={{ py: 0 }}
     >
       {parse(post.content, htmlParserOptions)}
     </Post>
