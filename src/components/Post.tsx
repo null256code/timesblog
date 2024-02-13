@@ -52,7 +52,7 @@ export default function Post(props: PostProps) {
             color="neutral"
             underline="always"
           >
-            {postedTime.toLocaleDateString()}
+            {postedTime.toLocaleDateString("ja-JP")}
           </WpLink>
         </Grid>
         <Grid xs={12} mt={rootPost || title ? undefined : -2}>
