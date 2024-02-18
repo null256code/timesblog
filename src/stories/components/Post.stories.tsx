@@ -1,5 +1,6 @@
 import Post from "@/components/Post";
 import { Meta, StoryObj } from "@storybook/react";
+import { MicroCMSDate } from "microcms-js-sdk";
 
 const sampleBody = (
   <>
@@ -14,13 +15,6 @@ const sampleBody = (
     </p>
   </>
 );
-
-interface MicroCMSDate {
-  createdAt: string;
-  updatedAt: string;
-  publishedAt?: string;
-  revisedAt?: string;
-}
 
 const mockDate = {
   createdAt: "2024-01-01",

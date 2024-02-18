@@ -1,10 +1,10 @@
 import { Chip, Stack } from "@mui/joy";
 import { WpLink } from "./wrapper/WpLink";
 
-export default function TagList(props: Props) {
+export default function TagList(props: TagListProps) {
   const { tags } = props;
   return (
-    <Stack direction="row" spacing={2}>
+    <Stack direction="row" flexWrap="wrap" gap={2}>
       {tags.map((t, index) =>
         t.link ? (
           <WpLink key={`TagList-${index}`} href={t.link} underline="none">
@@ -22,7 +22,7 @@ export default function TagList(props: Props) {
   );
 }
 
-type Props = {
+export type TagListProps = {
   tags: {
     tagName: string;
     link?: string;
