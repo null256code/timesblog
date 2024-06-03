@@ -8,17 +8,22 @@ export default function CodeBlock({ children }: { children: ReactNode }) {
       color="neutral"
       variant="soft"
       sx={{
-        p: 1,
         border: 1,
         borderColor: "lightgray",
         borderRadius: 4,
         borderStyle: "dotted",
-        whiteSpace: "pre",
-        overflowX: "scroll",
-        scrollbarWidth: "thin",
       }}
     >
-      <Typography component="code" level="body-xs">
+      <Typography
+        component="code"
+        level="body-xs"
+        sx={{
+          m: 1,
+          whiteSpace: "pre",
+          overflowX: "scroll",
+          scrollbarWidth: "thin",
+        }}
+      >
         {children}
       </Typography>
     </Sheet>

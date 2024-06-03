@@ -60,7 +60,7 @@ export default async function RootLayout({
             top: { xs: "72px", md: 0 },
             left: { xs: 0, md: "240px" },
             p: 3,
-            width: { xs: undefined, md: "540px" },
+            width: { xs: "100vw", md: "540px" },
           }}
         >
           {children}
