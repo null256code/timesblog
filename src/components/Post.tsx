@@ -17,7 +17,7 @@ export default function Post(props: PostProps) {
     ...cardProps
   } = props;
   return (
-    <Card {...cardProps}>
+    <Card sx={{ minWidth: 0 }} {...cardProps}>
       <Grid container spacing={1}>
         <Grid xs={10} py={0}>
           {rootPost && (
