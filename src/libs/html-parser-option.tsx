@@ -26,7 +26,9 @@ export const htmlParserOptions: HTMLReactParserOptions = {
       const alt = tagElement.attribs["alt"];
       return <ImageWithModal src={src} alt={alt} />;
     } else if (tagElement.name === "code") {
-      return <CodeSpan>{domToReact(tagElement.children)}</CodeSpan>;
+      return (
+        <CodeSpan>{domToReact(tagElement.children as DOMNode[])}</CodeSpan>
+      );
     } else if (tagElement.name === "pre") {
       const childTagElement = tagElement.childNodes
         .map((c) => getTagElement(c))
