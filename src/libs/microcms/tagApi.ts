@@ -1,5 +1,6 @@
 import { MicroCMSDate, MicroCMSQueries } from "microcms-js-sdk";
 import { microCMSClient } from "./microcms-client";
+import { MQ } from "./microcms-query";
 
 const ENDPOINT = "tags";
 
@@ -18,19 +19,21 @@ const getTagList = async (queries?: MicroCMSQueries) => {
   return listData;
 };
 
-const keyOfIsVisibleInMenu: keyof TagResponse = "isVisibleInMenu";
 export const getMenuTagList = async () => {
   return getTagList({
-    filters: `${keyOfIsVisibleInMenu}[equals]true`,
+    filters: MQ.equals<TagResponse>("isVisibleInMenu", true),
   });
 };
 
-const keyOfTagKey: keyof TagResponse = "tagKey";
 export const getTagDetailByTagKey = async (tagKey: string) => {
+  const filterQuery = [
+    MQ.equals<TagResponse>("tagKey", tagKey),
+    MQ.equals<TagResponse>("isVisibleInMenu", true),
+  ].join("[and]"); // TODO: MQに[and]も移したい
   const response = await microCMSClient.getList<TagResponse>({
     endpoint: ENDPOINT,
     queries: {
-      filters: `${keyOfTagKey}[equals]${tagKey}[and]${keyOfIsVisibleInMenu}[equals]true`,
+      filters: filterQuery,
       limit: 1,
     },
   });

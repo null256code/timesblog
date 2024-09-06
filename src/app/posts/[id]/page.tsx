@@ -1,8 +1,14 @@
 import Post from "@/components/Post";
 import ThreadPost from "@/components/ThreadPost";
 import { htmlParserOptions } from "@/libs/html-parser-option";
-import { getPostDetail, getPostList } from "@/libs/microcms/postApi";
+import {
+  getPostDetail,
+  getPostList,
+  PostContentId,
+  PostResponse,
+} from "@/libs/microcms/postApi";
 import parse from "html-react-parser";
+import { MQ } from "../../../libs/microcms/microcms-query";
 
 export const revalidate = 60 * 60;
 
@@ -15,7 +21,7 @@ export async function generateStaticParams() {
 export default async function PostDetail({
   params: { id },
 }: {
-  params: { id: string };
+  params: { id: PostContentId };
 }) {
   const postDetail = await getPostDetail(id);
 
@@ -23,8 +29,8 @@ export default async function PostDetail({
     ? await getPostDetail(postDetail.rootPost.id) // XXX: postDetail.rootPostを使うとtagsからid以外取れないので、とりあえず…
     : postDetail;
   const childPostsFilter = postDetail.rootPost
-    ? `rootPost[equals]${postDetail.rootPost.id}`
-    : `rootPost[equals]${id}`;
+    ? MQ.equals<PostResponse>("rootPost", postDetail.rootPost.id)
+    : MQ.equals<PostResponse>("rootPost", id);
   const { contents: childPosts } = await getPostList({
     filters: childPostsFilter,
     orders: "createdAt",

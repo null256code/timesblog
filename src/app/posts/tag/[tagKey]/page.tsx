@@ -6,6 +6,7 @@ import { Stack } from "@mui/joy";
 import parse from "html-react-parser";
 import { notFound } from "next/navigation";
 import { getTagDetailByTagKey } from "./../../../../libs/microcms/tagApi";
+import { MQ } from "@/libs/microcms/microcms-query";
 
 export const revalidate = 60 * 60;
 
@@ -25,9 +26,8 @@ export default async function PostsByTag({
     notFound(); // TODO: 記事が何もないことが分かるページを作る
   }
 
-  const keyOfTags: keyof PostResponse = "tags";
   const { contents } = await getPostList({
-    filters: `${keyOfTags}[contains]${tag.id}`,
+    filters: MQ.contains<PostResponse>("tags", tag.id),
   });
 
   if (!contents || contents.length === 0) {
