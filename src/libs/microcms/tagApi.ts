@@ -26,10 +26,10 @@ export const getMenuTagList = async () => {
 };
 
 export const getTagDetailByTagKey = async (tagKey: string) => {
-  const filterQuery = [
+  const filterQuery = MQ.all(
     MQ.equals<TagResponse>("tagKey", tagKey),
     MQ.equals<TagResponse>("isVisibleInMenu", true),
-  ].join("[and]"); // TODO: MQに[and]も移したい
+  );
   const response = await microCMSClient.getList<TagResponse>({
     endpoint: ENDPOINT,
     queries: {
