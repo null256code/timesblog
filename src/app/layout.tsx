@@ -8,6 +8,7 @@ import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
 import { Box, CssBaseline } from "@mui/joy";
+import { MQ } from "@/libs/microcms/microcms-query";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,11 +25,10 @@ export default async function RootLayout({
   const { profile } = await getDefinition();
   const { contents: menuTags } = await getMenuTagList();
 
-  const keyOfTags: keyof PostResponse = "tags";
   const tagsWithPostCount = await Promise.all(
     menuTags.map(async (t) => {
       const postsOfMenuTag = await getPostList({
-        filters: `${keyOfTags}[contains]${t.id}`,
+        filters: MQ.contains<PostResponse>("tags", t.id),
       });
       return {
         tagKey: t.tagKey,
