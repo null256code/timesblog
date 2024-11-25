@@ -9,8 +9,34 @@ import {
 } from "@/libs/microcms/postApi";
 import parse from "html-react-parser";
 import { MQ } from "../../../libs/microcms/microcms-query";
+import { Metadata, ResolvingMetadata } from "next";
 
 export const revalidate = 60 * 60;
+
+type Props = {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  // read route params
+  const id = (await params).id;
+  const { title, rootPost } = await getPostDetail(id);
+  const { title: rootPostTitle } = rootPost ?? {};
+
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: `TimesBlog | ${title ?? rootPostTitle}`,
+    openGraph: {
+      type: "article",
+      images: previousImages,
+    },
+  };
+}
 
 export async function generateStaticParams() {
   const { contents } = await getPostList();

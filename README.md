@@ -15,16 +15,16 @@
 - localはプロジェクトルートに `.env.local` を作成して設定
 
 | key                  | value                |
-|----------------------|----------------------|
-| MICRO_CMS_SERVICE_ID | microCMSのサービスID  |
-| MICRO_CMS_API_KEY    | microCMSのAPIキー     |
+| -------------------- | -------------------- |
+| MICRO_CMS_SERVICE_ID | microCMSのサービスID |
+| MICRO_CMS_API_KEY    | microCMSのAPIキー    |
 
 ## 開発
 
 ### npm関連
 
-| コマンド             | 説明                                  |
-|---------------------|---------------------------------------|
-| `npm run dev`       | <http://localhost:3000> 立ち上がる     |
-| `npm run storybook` | <http://localhost:6006> 立ち上がる     |
-| `npm run format`    | prettierでフォーマットされる            |
+| コマンド            | 説明                               |
+| ------------------- | ---------------------------------- |
+| `npm run dev`       | <http://localhost:3000> 立ち上がる |
+| `npm run storybook` | <http://localhost:6006> 立ち上がる |
+| `npm run format`    | prettierでフォーマットされる       |
