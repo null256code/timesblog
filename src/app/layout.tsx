@@ -15,6 +15,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "TimesBlog",
   description: "TimesBlogはシンプルなブログです",
+  openGraph: {
+    type: "website",
+    url: "https://timesblog.vercel.app", // TODO: 動的に取得したほうがいい気がする
+    images: ["/timesblog_ogp_image.png"],
+  },
 };
 
 export default async function RootLayout({
